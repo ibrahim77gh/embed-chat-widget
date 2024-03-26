@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // Customization props
 const defaultTitle = "Default Title";
 const defaultSubtitle = "Default Subtitle";
+const chatbot_id = "";
 
 // Function to merge default and custom props
 const mergeProps = (defaultProps, customProps) => {
@@ -21,6 +22,7 @@ const extractCustomizationOptions = () => {
     return {
       title: window.MyChatWidget.title,
       subtitle: window.MyChatWidget.subtitle,
+      chatbot_id: window.MyChatWidget.chatbot_id,
       // Add other customization options here
     };
   }
