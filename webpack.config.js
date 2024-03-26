@@ -6,7 +6,10 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.min.js',
-        assetModuleFilename: '[name][ext]'
+        assetModuleFilename: '[name][ext]',
+        library: 'MyChatWidget', // Expose bundle as a global variable
+        libraryTarget: 'umd', // Make bundle usable in various module systems
+        umdNamedDefine: true,
     },
     module: {
         rules: [
