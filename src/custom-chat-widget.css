@@ -1,0 +1,22 @@
+/* custom-chat-widget.css */
+
+/* Header background color */
+.rcw-header {
+    background-color: #FFB547 !important;
+  }
+  
+  /* Message box background color */
+.rcw-message-box {
+    background-color: #FFB547 !important;
+  }
+  
+  /* Close button color */
+.rcw-previewer-button {
+  background-color: #FFB547 !important;
+  }
+  
+  .rcw-message > .rcw-message {
+    background-color: black;
+    color: white;
+  }
+  

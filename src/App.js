@@ -4,7 +4,7 @@ import { Widget, addResponseMessage } from 'react-chat-widget';
 import logo from './logo.svg';
 import 'react-chat-widget/lib/styles.css';
 import axios from 'axios';
-
+import '../src/custom-chat-widget.css';
 function App({ title, subtitle, chatbot_id }) {
   // dcdc9b8e-1699-4dc2-aee6-4a5db516649f
   const [messages, setMessages] = useState([]);
@@ -47,12 +47,13 @@ function App({ title, subtitle, chatbot_id }) {
 
   return (
     <div className="App">
-      <Widget
+      <Widget  
         handleNewUserMessage={handleNewUserMessage}
         profileAvatar={logo}
         title={title}
         subtitle={subtitle}
         emojis={true}
+        
       />
     </div>
   );
