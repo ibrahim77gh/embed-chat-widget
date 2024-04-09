@@ -1,8 +1,9 @@
 // App.js
 import React, { useEffect, useState } from 'react';
 import { Widget, addResponseMessage } from 'react-chat-widget';
-import logo from './logo.svg';
-import 'react-chat-widget/lib/styles.css';
+import logo from './android-icon-72x72.png';
+import close from './cross.png';
+// import 'react-chat-widget/lib/styles.css';
 import axios from 'axios';
 import '../src/custom-chat-widget.css';
 function App({ title, subtitle, chatbot_id }) {
@@ -48,11 +49,15 @@ function App({ title, subtitle, chatbot_id }) {
   return (
     <div className="App">
       <Widget  
+        // launcherCloseImg={close}
+        // launcherOpenImg={logo}
         handleNewUserMessage={handleNewUserMessage}
         profileAvatar={logo}
         title={title}
         subtitle={subtitle}
         emojis={true}
+        
+        
         
       />
     </div>
