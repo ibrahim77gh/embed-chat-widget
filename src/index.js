@@ -20,8 +20,6 @@ const mergeProps = (defaultProps, customProps) => {
 const extractCustomizationOptions = () => {
   if (window.MyChatWidget && typeof window.MyChatWidget === 'object') {
     return {
-      title: window.MyChatWidget.title,
-      subtitle: window.MyChatWidget.subtitle,
       chatbot_id: window.MyChatWidget.chatbot_id,
       // Add other customization options here
     };

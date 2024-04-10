@@ -6,12 +6,27 @@ import close from './cross.png';
 // import 'react-chat-widget/lib/styles.css';
 import axios from 'axios';
 import '../src/custom-chat-widget.css';
-function App({ title, subtitle, chatbot_id }) {
+function App({ chatbot_id='fa8b23ec-9fbc-4d46-8221-8bf33129adf8' }) {
   // dcdc9b8e-1699-4dc2-aee6-4a5db516649f
   const [messages, setMessages] = useState([]);
+  const [title, setTitle] = useState('Default Title');
+  const [subtitle, setSubtitle] = useState('Default Subtitle');
+  const [chatbot, setChatbot] = useState({});
+
+  const getChatbotData = async (chatbot_id) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/chatbot/${chatbot_id}/`)
+      setChatbot(response.data)
+      if (response.data.title) setTitle(response.data.title);
+      if (response.data.subtitle) setSubtitle(response.data.subtitle);
+      if (response.data.initial_message) addResponseMessage(response.data.initial_message);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    addResponseMessage('Welcome to this **awesome** chat!');
+    getChatbotData(chatbot_id);
   }, []);
 
   const handleNewUserMessage = async (newMessage) => {
@@ -21,13 +36,11 @@ function App({ title, subtitle, chatbot_id }) {
       content: newMessage,
     };
     setMessages((prevMessages) => [...prevMessages, userChatMessage]);
-
-    console.log(`New message incoming! ${newMessage}`);
     
     // Now send the message through the backend API
     const body = {
       messages: messages,
-      chatbot_id: 'dcdc9b8e-1699-4dc2-aee6-4a5db516649f',
+      chatbot_id: chatbot_id,
       query: newMessage
     };
 
@@ -39,7 +52,6 @@ function App({ title, subtitle, chatbot_id }) {
         content: response.data.response,
       };
       setMessages((prevMessages) => [...prevMessages, responseChatMessage]);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -56,9 +68,6 @@ function App({ title, subtitle, chatbot_id }) {
         title={title}
         subtitle={subtitle}
         emojis={true}
-        
-        
-        
       />
     </div>
   );
