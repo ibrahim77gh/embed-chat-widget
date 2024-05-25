@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Widget, addResponseMessage, deleteMessages } from 'react-chat-widget';
-import logo from './android-icon-72x72.png';
-import close from './cross.png';
 // import 'react-chat-widget/lib/styles.css';
 import axios from 'axios';
 import '../src/custom-chat-widget.css';
@@ -80,7 +78,7 @@ function App({ chatbot_id }) {
     <div className="App">
       <Widget
         handleNewUserMessage={handleNewUserMessage}
-        profileAvatar={logo}
+        profileAvatar={"https://chattly-bkt-1.s3.amazonaws.com/assets/android-icon-72x72.png"}
         title={title}
         subtitle={subtitle}
         emojis={true}
