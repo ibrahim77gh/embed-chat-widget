@@ -9,6 +9,7 @@ function App({ chatbot_id }) {
   const [messages, setMessages] = useState([]);
   const [title, setTitle] = useState('Default Title');
   const [subtitle, setSubtitle] = useState('Powered by Chattly');
+  const [credits, setCredits] = useState(-1)
   const [chatbot, setChatbot] = useState({});
   const [sessionId, setSessionId] = useState('');
   const [waitingResponse, setWaitingResponse] = useState(false); // New state variable
@@ -32,6 +33,7 @@ function App({ chatbot_id }) {
       if (response.data.name) setTitle(response.data.name);
       if (response.data.subtitle) setSubtitle(response.data.subtitle);
       if (response.data.initial_message) addResponseMessage(response.data.initial_message);
+      if (response.data.credits) setCredits(response.data.credits);
     } catch (error) {
       console.error(error);
     }
@@ -68,14 +70,22 @@ function App({ chatbot_id }) {
       };
       setMessages((prevMessages) => [...prevMessages, responseChatMessage]);
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 403) {
+        setCredits(0);
+      } else {
+        console.error(error);
+      }
     } finally {
       setWaitingResponse(false); // Reset waiting for response
     }
   };
 
+  if (credits <= 0) {
+    return null; // Don't render anything if credits are less than or equal to 0
+  }
+
   return (
-    <div className="App">
+    <div style={{zIndex:100}} className="App">
       <Widget
         handleNewUserMessage={handleNewUserMessage}
         profileAvatar={"https://chattly-bkt-1.s3.amazonaws.com/assets/android-icon-72x72.png"}
@@ -86,6 +96,7 @@ function App({ chatbot_id }) {
       />
     </div>
   );
+
 }
 
 export default App;
